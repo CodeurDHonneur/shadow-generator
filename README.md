@@ -1,54 +1,53 @@
-# React + TypeScript + Vite
+# Projet : Shadow Generator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Objectif
+Créer une application web interactive en **React** qui permet à l'utilisateur de :
+- Ajouter plusieurs ombres à un élément.
+- Personnaliser chaque ombre (offset, blur, spread, couleur, etc.).
+- Visualiser l'effet en direct.
+- Copier le code CSS généré.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Fonctionnalités principales
 
-## Expanding the ESLint configuration
+### 1. Ajout et gestion des ombres
+- Bouton **"Add a shadow"** pour créer une nouvelle configuration.
+- Liste des ombres actuelles, cliquables pour modification.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 2. Personnalisation des ombres
+- Pour chaque ombre : 
+  - Offset X/Y
+  - Rayon de flou (blur)
+  - Étendue (spread)
+  - Couleur
+  - Opacité
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### 3. Prévisualisation en temps réel
+- Un composant `BoxPanel` affiche une boîte avec les ombres cumulées.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 4. Génération de code CSS
+- Bouton **"Get the code"** pour copier le code `box-shadow` complet.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## Stack technique
+- **React** (composants fonctionnels avec Hooks)
+- **CSS ou TailwindCSS** pour le style
+- **State management** avec `useState` ou `useReducer` pour gérer les ombres
+- **Clipboard API** pour copier le code CSS
+
+---
+
+## Listes des composants : 
+
+- layout : 
+  - header
+  - main
+- features :
+  - ShadowConfig
+  - ShadowView
+
+## CSS
+- couleurs bg et survol : #f2f4f5
+- #f9fbfa

@@ -1,0 +1,10 @@
+
+
+.mainLayout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--secondary-color);
+    height: calc(100vh - 60px);
+
+}
