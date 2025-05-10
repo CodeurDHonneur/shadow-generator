@@ -1,10 +1,20 @@
 import React from 'react'
 import ShadowList from './ShadowList'
 import styles from "../styles/ShadowContent.module.css"
-export default function ShadowContent() {
+import type { ShadowPropsType } from '../../../core/types/ensembleTypes';
+
+type ShadowContentProps = ShadowPropsType;
+
+export default function ShadowContent({configShadow, setConfigShadow}: ShadowContentProps) {
+
   return (
     <div className={styles.container}>
-      <ShadowList />
+      
+      <ShadowList 
+      configShadow={configShadow}
+      setConfigShadow={setConfigShadow}
+      />
+
     </div>
   )
 }

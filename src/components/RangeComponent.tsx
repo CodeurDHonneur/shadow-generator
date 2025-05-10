@@ -5,9 +5,11 @@ type RangeComponentProps = {
     title: string;  
     code: string;  
     onChange: (code: string, value: string) => void;
+    max: number | string;
+    min: number | string;
 }
 
-export default function RangeComponent({ title, code, onChange }: RangeComponentProps) {
+export default function RangeComponent({ title, code, onChange, max, min }: RangeComponentProps) {
     const [valueInput, setValueInput] = React.useState(0)
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,8 +43,8 @@ export default function RangeComponent({ title, code, onChange }: RangeComponent
                     value={valueInput}
                     onChange={(e) => handleChange(e)}
                     type="range"
-                    max="200"
-                    min="-200"
+                    max={max}
+                    min={min}
                     style={{
                         width: "450px",
                         appearance: "none",

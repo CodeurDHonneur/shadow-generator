@@ -1,37 +1,37 @@
 import React from 'react'
 import RangeComponent from '../../../components/RangeComponent'
 import styles from "../styles/Shadow.module.css";
+import type { ShadowPropsType } from '../../../core/types/ensembleTypes';
 
+type ShadowProps = ShadowPropsType;
 
-export default function Shadow() {
+export default function Shadow({configShadow, setConfigShadow}: ShadowProps ) {
   const [valueInputColor, setValueInputColor] = React.useState("#000000");
 
-  const [configShadow, setConfigShadow] = React.useState({
-    horizontalOffset: 0,
-    verticalOffset: 0,
-    blurRadius: 0,
-    spreadOffset: 0,
-    color: "#000000",
-  });
-
-
   const handleChange = (code: string, value: string) => {
-    // console.log(code, value);
     const newConfigShadow = {
       ...configShadow,
       [code]: value
     }
     setConfigShadow(newConfigShadow);
-    console.log(configShadow);
   };
-
-
+ 
   const values = [
     {id: 1, title: "Horizontal offset", code: 'horizontalOffset'},
     {id: 2, title: "Vertical offset", code: 'verticalOffset'},
     {id: 3, title: "Blur radius", code: 'blurRadius'},
     {id: 4, title: "Spread offset", code: 'spreadOffset'},
   ]
+
+  React.useEffect(() => {
+    const newConfigShadow = {
+      ...configShadow,
+      color: valueInputColor
+    };
+
+     setConfigShadow(newConfigShadow);
+
+  }, [valueInputColor]);
 
 
   return (
@@ -43,6 +43,8 @@ export default function Shadow() {
             code={value.code}
             onChange={handleChange}
             key={value.id}
+            max={200}
+            min={-200}
             />
         ))}
       </div>
