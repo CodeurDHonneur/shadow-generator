@@ -1,32 +1,45 @@
 import React from 'react';
 import styles from "../styles/RangeComponent.module.css";
 
+type RangeComponentProps = {
+    title: string;  
+    code: string;  
+    onChange: (code: string, value: string) => void;
+}
 
-export default function RangeComponent() {
+export default function RangeComponent({ title, code, onChange }: RangeComponentProps) {
     const [valueInput, setValueInput] = React.useState(0)
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setValueInput(Number(value));
+        onChange(code, value);
+    };
 
     return (
         <>
-            <div>
-                <div className={styles.description}>
-                    <h3>title</h3>
-                    <div>
-                        <p style={{
-                            padding: "5px",
-                            border: "3px solid #f2f4f5",
-                            backgroundColor: "white",
-                            fontSize: "20px",
-                            width: "30px"
-                        }}>{valueInput}</p>
-                        <p>unité</p>
-                    </div>
+            <div className={styles.description}>
+                <h4>{title}</h4>
+                <div className={styles.descriptionChild}>
+                    <div style={{
+                        padding: "5px",
+                        border: "3px solid #f2f4f5",
+                        backgroundColor: "white",
+                        fontSize: "20px",
+                        width: "55px",
+                        textAlign: "center"
+                    }}>{valueInput}</div>
+                    <div style={{
+                        fontSize: "1.3rem"
+                    }}>px</div>
                 </div>
             </div>
+
             <div className={styles.containerInputRange}>
                 <input
                     list="tickmarks"
                     value={valueInput}
-                    onChange={(e) => setValueInput(Number(e.target.value))}
+                    onChange={(e) => handleChange(e)}
                     type="range"
                     max="200"
                     min="-200"
