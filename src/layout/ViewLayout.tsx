@@ -5,10 +5,14 @@ import Button from '../components/Button'
 
 type ViewLayoutProps = {
   shadow: string;
+  setShowCode: React.Dispatch<React.SetStateAction<boolean>>;
+  setGetCode: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export default function ViewLayout({ shadow }: ViewLayoutProps) {
-  
+export default function ViewLayout({ shadow,setShowCode, setGetCode }: ViewLayoutProps) {
+    
+    const styleCircle = React.useRef(null)
+   
     const styleButtonAdd = {
         paddingInline: '15px',
         paddingBlock: '10px',
@@ -19,12 +23,20 @@ export default function ViewLayout({ shadow }: ViewLayoutProps) {
         position: 'relative',
         zIndex:'2'
     }
-    const copieCode = async () => {
-        await navigator.clipboard.writeText(`
-            shadow: ${shadow}
-            `)
-    };
 
+    React.useEffect(() => {
+        if (styleCircle.current) {
+        const computedStyles = window.getComputedStyle(styleCircle.current);
+        const bgColor = computedStyles.backgroundColor;
+        const boxShadow = computedStyles.boxShadow;
+        setGetCode(`
+background-color : ${bgColor};
+box-shadow : ${boxShadow};
+            `);
+        }
+    }, [shadow])
+
+    
 
     return (
         <div style={{
@@ -35,10 +47,11 @@ export default function ViewLayout({ shadow }: ViewLayoutProps) {
         }}>
             <Button
                 title="Get the code"
-                onClick={copieCode}
+                onClick={() => setShowCode(true)}
                 styles={styleButtonAdd}
             />
             <div
+                ref={styleCircle}
                 style={{
                     width: "500px",
                     height: "500px",
@@ -46,10 +59,10 @@ export default function ViewLayout({ shadow }: ViewLayoutProps) {
                     backgroundColor: "white",
                     boxShadow: `${shadow}`
                 }}
-                
                 >
-
             </div>
+
+         
         </div>
     )
 }
